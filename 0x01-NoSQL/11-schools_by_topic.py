@@ -11,6 +11,4 @@ def schools_by_topic(mongo_collection, topic):
             },
         },
     }
-    value = mongo_collection.find(query)
-    for v in value:
-        return [v]
+    return [val for val in mongo_collection.find(query)]
