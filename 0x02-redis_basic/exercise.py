@@ -12,7 +12,7 @@ def count_calls(method: Callable) -> Callable:
     '''
     @wraps(method)
     def invoker(self, *args, **kwargs) -> Any:
-        '''Invokes the given method after incrementing its call counter.
+        '''Invokes a method after incrementing the call counter.
         '''
         if isinstance(self._redis, redis.Redis):
             self._redis.incr(method.__qualname__)
@@ -21,11 +21,11 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
-    '''Tracks the call details of a method in a Cache class.
+    '''Tracks call details of a method in a Cache class.
     '''
     @wraps(method)
     def invoker(self, *args, **kwargs) -> Any:
-        '''Returns the method's output after storing its inputs and output.
+        '''Returns method's output after storing its inputs and output.
         '''
         in_key = '{}:inputs'.format(method.__qualname__)
         out_key = '{}:outputs'.format(method.__qualname__)
@@ -39,7 +39,7 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(fn: Callable) -> None:
-    '''Displays the call history of a Cache class' method.
+    '''Displays the call history of a Cache method.
     '''
     if fn is None or not hasattr(fn, '__self__'):
         return
@@ -64,10 +64,10 @@ def replay(fn: Callable) -> None:
 
 
 class Cache:
-    '''Represents an object for storing data in a Redis data storage.
+    '''Defines an object for storing data in a Redis data storage.
     '''
     def __init__(self) -> None:
-        '''Initializes a Cache instance.
+        '''Initializes Cache.
         '''
         self._redis = redis.Redis()
         self._redis.flushdb(True)
