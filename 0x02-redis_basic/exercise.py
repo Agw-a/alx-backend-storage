@@ -11,9 +11,8 @@ class Cache:
         '''Initialize Cache
         '''
         self._redis = redis.Redis()
+        self._redis.flushdb(True)
 
-    @call_history
-    @count_calls
     def store(self, data: Union[str, int, float, bytes]) -> str:
         '''store the input data in Redis using the random key and return key.
         '''
