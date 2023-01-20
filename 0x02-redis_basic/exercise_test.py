@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-'''A module for using the Redis NoSQL data storage.
+'''Module that defines Redis NoSQL data storage.
 '''
 import uuid
 import redis
-from functools import wraps
 from typing import Any, Callable, Union
+from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    '''Tracks the number of calls made to a method in a Cache class.
+    '''Tracks the number of calls made to @store method in a Cache class.
     '''
     @wraps(method)
     def invoker(self, *args, **kwargs) -> Any:
